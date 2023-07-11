@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "renkodf"
+version = "1.0"
+description = "Transform Tick Data into OHLCV Renko Dataframe!"
+readme = "README.md"
+authors = [
+    { name = "Carlos Gabriel", email = "carlgsr1@gmail.com" }
+]
+license = { file = "LICENSE.txt" }
+classifiers = [
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Natural Language :: Portuguese (Brazilian)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Utilities",
+]
+keywords = ["renko", "pyrenko", "renkopy", "renkowicks", "renko ohlc",
+            'finance','candlestick','ohlc','market','investing','technical analysis']
+requires-python = ">=3.8"
+dependencies = ["numpy", "pandas", "mplfinance"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[project.urls]
+"Homepage" = "https://github.com/srlcarlg/renkodf"
