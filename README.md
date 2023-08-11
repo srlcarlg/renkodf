@@ -325,3 +325,7 @@ The use of any trade name or trademark is for identification and reference purpo
 ```python
 
 ```
+
+## References
+   The main logical structure seen in the 'add_prices' function is a REFORMULATION of the code concepts seen in [Sergey Malchevskiy's pyrenko](https://github.com/quantroom-pro/pyrenko), which in fact, was the first more functional Renko calculation available in python.
+
