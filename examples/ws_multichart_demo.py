@@ -22,8 +22,8 @@ from renkodf import RenkoWS
 
 df_ticks = pd.read_parquet('data/BNBUSDT-aggTrades-2023-06_9000Rows.parquet')
 
-initial_timestamp = df_ticks['timestamp'][0]
-initial_price = df_ticks['close'][0]
+initial_timestamp = df_ticks['timestamp'].iat[0]
+initial_price = df_ticks['close'].iat[0]
 
 r = RenkoWS(initial_timestamp, initial_price, brick_size=0.04)
 initial_df = r.initial_df

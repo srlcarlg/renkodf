@@ -4,9 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "renkodf"
-version = "1.0"
+version = "1.1"
 description = "Transform Tick Data into OHLCV Renko Dataframe!"
-readme = "README.md"
+readme = "README_link.md"
 authors = [
     { name = "Carlos Gabriel", email = "carlgsr1@gmail.com" }
 ]
