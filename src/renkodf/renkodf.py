@@ -134,6 +134,28 @@ def _build_ohlc_wicks(prices, directions, wicks, brick_size):
 
 class Renko:
     def __init__(self, df: pd.DataFrame, brick_size: float, add_columns: list = None, show_progress: bool = False):
+        """
+        Create Renko OHLCV dataframe with existing Ticks data.
+        Usage
+        ------
+        >> from renkodf import Renko \n
+        >> r = Renko(df_ticks, brick_size) \n
+        >> df = r.renkodf() \n
+        Parameters
+        ----------
+        df : dataframe
+            Only two columns are required:
+            * "close": Mandatory.
+            * "datetime": If is not present, the index will be used.
+        brick_size : float
+            Cannot be less than or equal to 0.00...
+        add_columns : list
+            A list of strings(column names) to be added to the final result, such as spread, quantity, etc.
+        show_progress : bool
+            A self-explanatory percentage number from 0 to 100;
+            The performance will be affected by 2x if it's True
+        """
+
         if brick_size is None or brick_size <= 0:
             raise ValueError("brick_size cannot be 'None' or '<= 0'")
         if 'datetime' not in df.columns:
