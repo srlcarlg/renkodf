@@ -136,17 +136,20 @@ class Renko:
     def __init__(self, df: pd.DataFrame, brick_size: float, add_columns: list = None, show_progress: bool = False):
         """
         Create Renko OHLCV dataframe with existing Ticks data.
+
         Usage
         ------
         >> from renkodf import Renko \n
         >> r = Renko(df_ticks, brick_size) \n
         >> df = r.renkodf() \n
+
         Parameters
         ----------
         df : dataframe
             Only two columns are required:
             * "close": Mandatory.
             * "datetime": If is not present, the index will be used.
+
         brick_size : float
             Cannot be less than or equal to 0.00...
         add_columns : list
