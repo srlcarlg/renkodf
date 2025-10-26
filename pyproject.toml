@@ -27,7 +27,7 @@ classifiers = [
 keywords = ["renko", "pyrenko", "renkopy", "renkowicks", "renko ohlc",
             'finance','candlestick','ohlc','market','investing','technical analysis']
 requires-python = ">=3.8"
-dependencies = ["numpy", "pandas", "mplfinance"]
+dependencies = ["numpy", "pandas", "mplfinance", "numba"]
 
 [tool.setuptools]
 package-dir = {"" = "src"}
