@@ -1,10 +1,13 @@
 '''
 This file contains a simple animation demo using mplfinance.
 
-Imagine that we make an API request where we receive the latest asset data; up to the present moment,
-create the Renko Price from it, and save it in a file.
-Then we make a websocket connection to this same asset and use
-the previous Price Renko Data as a starting point, without creating the chart from scratch!
+Imagine that we make an API request where:
+  * we receive the latest asset data; up to the present moment,
+  * create the Renko Chart from it,
+  * and save it into a file.
+
+Then we make a websocket connection to this same asset and:
+  * use the previous Renko Chart as starting point, without creating the chart from scratch!
 
 Useful when you need large initial data to calculate/plot your technical indicators.
 '''
@@ -13,11 +16,11 @@ import mplfinance as mpf
 import pandas as pd
 from matplotlib import animation
 
-from renkodf import RenkoWS, Renko
+from renkodf import Renko, RenkoWS
 
 df_ticks = pd.read_parquet('data/US30_T1_cT.parquet')
 df_ticks.rename(columns={'bid': 'close'}, inplace=True)
-df_ticks['timestamp'] = pd.DatetimeIndex(df_ticks.index).asi8 // 10 ** 6  # Datetime to Timestamp (ns to ms)
+df_ticks['timestamp'] = pd.DatetimeIndex(df_ticks.index).asi8 # Timestamp (us)
 
 df_GET = df_ticks.loc[(df_ticks.index <= '2023-06-28 13:50')]
 df_ticks = df_ticks.loc[(df_ticks.index >= '2023-06-28 13:50')]
@@ -27,13 +30,8 @@ r = Renko(df_GET, brick_size=5)
 ext_df = r.to_rws()  # Save this
 
 # Load the file and chosen its Renko Mode
-r = RenkoWS(external_df=ext_df, external_mode='wicks')
-initial_df = r.initial_df
-# if you need multiple dataframes of different modes as initial_df
-# just add 's' to get this function:
-# r.initial_dfs('normal')
-# r.initial_dfs('nongap')
-# etc...
+r = RenkoWS(external_df=ext_df, ts_unit='us')
+initial_df = r.renko_df()
 
 fig, axes = mpf.plot(initial_df, returnfig=True, volume=True,
                     figsize=(11, 8), panel_ratios=(2, 1),

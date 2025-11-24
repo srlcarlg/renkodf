@@ -1,8 +1,8 @@
 '''
 This file contains a simple animation demo using mplfinance.
 
-It is highly recommended that, in real cases, the Animation/Real time Renko be run
-in another process using the multiprocessing library of your choice,
+It's highly recommended that, in real cases, the Animation/Real-Time Renko Chart
+be running in another process using the multiprocessing library of your choice,
 as the processing load required to generate the dataframe may cause bottlenecks
 in other services such as websocket connection, API requests , etc.
 
@@ -10,8 +10,8 @@ Taking Python's multiprocessing library as an example, the basic usage would be:
 * mp.Process to run all this code (and its indicators, signals, etc)
 * mp.Array to update and read timestamp/price value.
 
-In Ticks data used in question, there will be a GAP on the first sell wave,
-which is a good example of how the renko will look when this happens during a brick formation.
+In the Ticks data used (BNBUSDT), there will be a GAP on the first sell wave,
+which is a good example of how the Renko Chart will look when this happens during a brick formation.
 '''
 
 import mplfinance as mpf
@@ -22,11 +22,11 @@ from renkodf import RenkoWS
 
 df_ticks = pd.read_parquet('data/BNBUSDT-aggTrades-2023-06_9000Rows.parquet')
 
-initial_timestamp = df_ticks['timestamp'].iat[0]
+initial_timestamp = df_ticks['timestamp'].iat[0] # Timestamp (ms)
 initial_price = df_ticks['close'].iat[0]
 
-r = RenkoWS(initial_timestamp, initial_price, brick_size=0.04)
-initial_df = r.initial_df
+r = RenkoWS(initial_timestamp, initial_price, brick_size=0.04, ts_unit='ms')
+initial_df = r.renko_df()
 
 fig, axes = mpf.plot(initial_df, returnfig=True, volume=True,
                     figsize=(11, 8), panel_ratios=(2, 1),

@@ -1,11 +1,11 @@
 '''
 This file contains a simple multi chart animation demo using mplfinance.
 
-As described in 'renkodf_modes.ipynb'
-we can have multiple dataframes of different modes from the same instance.
+As described in 'renkodf_modes.ipynb':
+  * we can have multiple dataframes of different modes from the same instance.
 
-It is highly recommended that, in real cases, the Animation/Real time Renko be run
-in another process using the multiprocessing library of your choice,
+It's highly recommended that, in real cases, the Animation/Real-Time Renko Chart
+be running in another process using the multiprocessing library of your choice,
 as the processing load required to generate the dataframe may cause bottlenecks
 in other services such as websocket connection, API requests , etc.
 
@@ -22,11 +22,11 @@ from renkodf import RenkoWS
 
 df_ticks = pd.read_parquet('data/BNBUSDT-aggTrades-2023-06_9000Rows.parquet')
 
-initial_timestamp = df_ticks['timestamp'].iat[0]
+initial_timestamp = df_ticks['timestamp'].iat[0] # Timestamp (ms)
 initial_price = df_ticks['close'].iat[0]
 
-r = RenkoWS(initial_timestamp, initial_price, brick_size=0.04)
-initial_df = r.initial_df
+r = RenkoWS(initial_timestamp, initial_price, brick_size=0.04, ts_unit='ms')
+initial_df = r.renko_df()
 
 fig = mpf.figure(style='charles', figsize=(12,9))
 fig.subplots_adjust(hspace=0.01, wspace=0.01)
